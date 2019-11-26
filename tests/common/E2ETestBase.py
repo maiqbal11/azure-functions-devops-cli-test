@@ -13,7 +13,7 @@ class E2ETestBase(TestCase):
         self.host_version: str = None  # v2
         self.language: str = None  # python
         self.worker_version: str = None  # 3.6
-        self.function_app_name: str = None  # v2_python_36
+        self.function_app_name: str = None  # v2-python-36
         self._populate_function_app_meta()
 
     # This is used for testing locally, by setting environment variable
@@ -39,5 +39,5 @@ class E2ETestBase(TestCase):
         # Sanitize worker version
         sanitized_worker_version: str = self._worker_version.replace('.', '')
         self._function_app_name = (
-            f'{self._host_version}_{self._language}_{sanitized_worker_version}'
+            f'{self._host_version}-{self._language}-{sanitized_worker_version}'
         )
