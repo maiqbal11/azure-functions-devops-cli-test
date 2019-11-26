@@ -1,15 +1,8 @@
-import unittest
 import requests
-import os
+from tests.common import E2ETestBase
 
 
-class TestHttp(unittest.TestCase):
-    def setUp(self):
-        self.stamp_address = os.environ['StampAddress']
-        self.function_app_name = 'v2_python_37'
-
-        # Replace with http://localhost:7071 when testing locally at ease
-        self.function_app_url = f'http://{self.function_app_name}.{self.stamp_address}'
+class TestHttp(E2ETestBase):
 
     def test_numpy_trigger(self):
         function_address = f'{self.function_app_url}/api/NumpyTrigger'
