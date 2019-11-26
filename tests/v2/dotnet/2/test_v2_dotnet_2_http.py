@@ -2,7 +2,8 @@ import requests
 from tests.common import E2ETestBase
 
 
-class TestHttp(E2ETestBase):
+class TestV2Dotnet2Http(E2ETestBase):
+
     def test_plain_text_trigger(self):
         function_address = f'{self.function_app_url}/api/PlainTextTrigger'
 

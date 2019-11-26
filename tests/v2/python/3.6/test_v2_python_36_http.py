@@ -2,7 +2,7 @@ import requests
 from tests.common import E2ETestBase
 
 
-class TestHttp(E2ETestBase):
+class TestV2Python36Http(E2ETestBase):
 
     def test_numpy_trigger(self):
         function_address = f'{self.function_app_url}/api/NumpyTrigger'
