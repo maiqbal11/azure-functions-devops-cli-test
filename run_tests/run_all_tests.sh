@@ -2,5 +2,5 @@
 
 set -e -x
 export StampAddress=$STAMPADDRESS
-python -m pip install pytest requests
-python -m pytest tests
+python3 -m pip install pytest requests
+python3 -m pytest tests
