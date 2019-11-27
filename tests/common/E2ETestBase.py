@@ -12,7 +12,7 @@ class E2ETestBase(TestCase):
         self.stamp_address = os.getenv('StampAddress')
         self.host_version: str = None  # v2
         self.language: str = None  # python
-        self.worker_version: str = None  # 3.6
+        self.worker_version: str = None  # 36
         self.function_app_name: str = None  # v2-python-36
         self._populate_function_app_meta()
 
@@ -32,12 +32,11 @@ class E2ETestBase(TestCase):
         # e.g. ./project/tests/v2/dotnet/2/test_http.py
         paths.reverse()
         tests_index: int = paths.index('tests')
-        self._host_version = paths[tests_index - 1]
-        self._language = paths[tests_index - 2]
-        self._worker_version = paths[tests_index - 3]
+        self.host_version = paths[tests_index - 1]
+        self.language = paths[tests_index - 2]
+        self.worker_version = paths[tests_index - 3]
 
         # Sanitize worker version
-        sanitized_worker_version: str = self._worker_version.replace('.', '')
-        self._function_app_name = (
-            f'{self._host_version}-{self._language}-{sanitized_worker_version}'
+        self.function_app_name = (
+            f'{self.host_version}-{self.language}-{self.worker_version}'
         )
