@@ -23,7 +23,7 @@ class E2ETestBase(TestCase):
         if os.getenv('FunctionAppUrl'):
             return os.environ['FunctionAppUrl']
 
-        return f'http://{self.function_app_name}.{self.stamp_address}'
+        return f'{self.function_app_name}.{self.stamp_address}'
 
     def _populate_function_app_meta(self):
         paths = os.path.abspath(self._module_path).split(os.path.sep)
