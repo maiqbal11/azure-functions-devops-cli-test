@@ -80,7 +80,7 @@ for ($i = 0; $i -lt $AppPaths.Count; $i++) {
     Start-Job -Name "$testName" -ScriptBlock {
         cd $args[0]
         $port = $args[1]
-        $env:FunctionAppUrl = "http://localhost:$port"
+        $env:FunctionAppUrl = "localhost:$port"
         python -B -m pytest $args[2]
     } -ArgumentList @("$ProjectRoot", "$port", "$testDir")
 }

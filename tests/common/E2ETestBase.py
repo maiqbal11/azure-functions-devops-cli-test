@@ -17,7 +17,7 @@ class E2ETestBase(TestCase):
         self._populate_function_app_meta()
 
     # This is used for testing locally, by setting environment variable
-    # FunctionAppUrl = http://localhost:7071
+    # FunctionAppUrl localhost:7071
     @property
     def function_app_url(self) -> str:
         if os.getenv('FunctionAppUrl'):
