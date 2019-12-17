@@ -13,7 +13,6 @@
 param (
     [ValidatePattern("v[\d|\.]+\\\w+\\[\d|\.]+")]
     [string]$AppPath = $null, # v2\dotnet\2
-
     [int]$DefaultPort = 7071 # func host start --port 7071
 )
 
@@ -21,10 +20,21 @@ $ProjectRoot = Resolve-Path "$PSScriptRoot\.."
 $TestAppsPath = "$ProjectRoot\test_apps"
 $TestsPath = "$ProjectRoot\tests"
 
+# Resolve Dependencies
+function Resolve-PythonDependencies() {
+    $enabled = $AppPath -Match "python"
+    $requirements_exist = Test-Path -Path "$TestAppsPath\$AppPath\requirements.txt"
+    if ($enabled -and $requirements_exist) {
+        pip install -r "$TestAppsPath\$AppPath\requirements.txt"
+    }
+}
+
 # Check virtual environment
 if (-not $env:VIRTUAL_ENV) {
     Write-Warning "Please run this script in a Python virtual environment with requirements.txt resolved"
     return
+} elseif ($null -ne $AppPath) {
+    Resolve-PythonDependencies
 }
 
 # Check function core tools
@@ -102,7 +112,7 @@ try {
             }
         }
         $currentJobNames = $newJobNames
-        Start-Sleep -Seconds 1
+        Start-Sleep -Seconds 3
     }
 } finally {
     foreach ($jobName in $JobNames) {

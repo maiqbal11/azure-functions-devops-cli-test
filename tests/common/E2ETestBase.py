@@ -2,6 +2,7 @@ from typing import Optional
 from unittest import TestCase
 import os
 import importlib
+import pathlib
 
 
 class E2ETestBase(TestCase):
@@ -15,6 +16,9 @@ class E2ETestBase(TestCase):
         self.worker_version: str = None  # 36
         self.function_app_name: str = None  # v2-python-36
         self._populate_function_app_meta()
+
+        # <project_root>/tests
+        self.test_root: pathlib.Path = pathlib.Path(__file__).parent.parent
 
     # This is used for testing locally, by setting environment variable
     # FunctionAppUrl localhost:7071
