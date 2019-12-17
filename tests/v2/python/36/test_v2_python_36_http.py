@@ -70,5 +70,6 @@ class TestV2Python36Http(E2ETestBase):
         self.assertEqual(resp.status_code, 200)
 
         for package in resp.text.split(sep=','):
-            (name, p) = package.split(sep='=')
-            self.assertTrue(path.exists(p))
+            (package_name, package_path) = package.split(sep='=')
+            self.assertIsNotNone(package_name)
+            self.assertIsNotNone(package_path)

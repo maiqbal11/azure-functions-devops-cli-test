@@ -59,3 +59,15 @@ class TestV2Python37Http(E2ETestBase):
         resp = requests.get(function_address)
 
         self.assertEqual(resp.status_code, 500)
+
+    def test_external_packages_trigger(self):
+        function_address = f'http://{self.function_app_url}/api/ExternalPackagesTrigger'
+
+        resp = requests.get(function_address)
+
+        self.assertEqual(resp.status_code, 200)
+
+        for package in resp.text.split(sep=','):
+            (package_name, package_path) = package.split(sep='=')
+            self.assertIsNotNone(package_name)
+            self.assertIsNotNone(package_path)
